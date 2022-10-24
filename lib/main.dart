@@ -1,6 +1,7 @@
 import 'package:bus_ticket_booking_app/Pages/login_page.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,14 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Ticket Booking ',
+      title: 'Flutter Demo',
       theme: ThemeData(
 
         primarySwatch: Colors.blue,
       ),
-      initialRoute: LoginPage.routename,
+      initialRoute: LoginPage.routeName,
       routes: {
-        LoginPage.routename:(context)=> const LoginPage(),
+        LoginPage.routeName:(context)=>LoginPage(),
       },
     );
   }
