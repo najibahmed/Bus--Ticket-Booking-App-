@@ -188,7 +188,7 @@ GoTravels ''',
                       letterSpacing: 2),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.greenAccent[700],
+                  backgroundColor: Colors.greenAccent[700],
                   elevation: 12,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -210,21 +210,16 @@ GoTravels ''',
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-
+                  onPressed: (){
+                    isLogin = false;
+                    _authenticate();
                   },
-                  child: TextButton(
-                    onPressed: (){
-                      isLogin = false;
-                      _authenticate();
-                    },
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: Colors.green[700],
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: Colors.green[700],
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

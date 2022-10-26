@@ -2,7 +2,6 @@
 
 
 import 'package:bus_ticket_booking_app/Models/user_model.dart';
-import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as Path;
 

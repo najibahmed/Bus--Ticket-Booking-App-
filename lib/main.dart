@@ -1,22 +1,31 @@
 import 'package:bus_ticket_booking_app/Pages/launcher_page.dart';
 import 'package:bus_ticket_booking_app/Pages/login_page.dart';
 import 'package:bus_ticket_booking_app/Provider/user_provider.dart';
+import 'package:bus_ticket_booking_app/onBoarding/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-void main() {
-  runApp(MultiProvider(
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final showHome = prefs.getBool("showHome") ?? false;
+
+  runApp(
+      MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
-      child: const MyApp()));
+      child:  MyApp(showHome:showHome)));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   final bool showHome;
 
-  // This widget is the root of your application.
+
+   const
+   MyApp({super.key, required this.showHome}); // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,10 +35,11 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.green,
       ),
-      initialRoute: LoginPage.routeName,
+      home: showHome? const LoginPage(): OnBoarding() ,
+      // initialRoute: OnBoarding.routeName,
       routes: {
-        LoginPage.routeName:(context)=>LoginPage(),
-        LauncherPage.routeName:(context)=>LauncherPage(),
+        LoginPage.routeName:(context)=>const LoginPage(),
+        LauncherPage.routeName:(context)=>const LauncherPage(),
       },
     );
   }
