@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class SeatPage extends StatefulWidget {
@@ -16,6 +17,8 @@ class _SeatPageState extends State<SeatPage> {
   int _radioSelected = 1;
    late String _radioVal;
   bool selected=false;
+  String seatNumber="";
+  int ?seatIndex;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +109,7 @@ class _SeatPageState extends State<SeatPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.6,
+                height: MediaQuery.of(context).size.height * 0.75,
                 margin: const EdgeInsets.fromLTRB(64, 16, 64, 16),
                 child: Stack(
                   children: [
@@ -150,20 +153,15 @@ class _SeatPageState extends State<SeatPage> {
                           Radius.circular(40),
                         ),
                         child: GridView.count(
-                          crossAxisCount: 4,
-                          mainAxisSpacing: 0,
-                          crossAxisSpacing: 0,
-                          children: [
-                                 builtSeat(),
-                                 builtSeat(),
-                                 builtSeat(),
-                                 builtSeat(),
-                                 builtSeat(),
-                                 builtSeat(),
-                                 builtSeat(),
-                                 builtSeat(),
+                            physics: NeverScrollableScrollPhysics(),
 
-              ]
+                            crossAxisCount: 4,
+                            mainAxisSpacing: 0,
+                            crossAxisSpacing:6,
+
+                          children: List.generate(40, (index) => CustomSeatGrid(index))
+              //
+              // ]
      ),
     ),
     ),
@@ -371,18 +369,32 @@ class _SeatPageState extends State<SeatPage> {
     );
   }
 
-   builtSeat() {
-    return GestureDetector(
+   CustomSeatGrid(var seatNumber) {
+    bool isBooked=false;
+    return isBooked ? Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.all(16),
+          child: Image.asset(
+            'assets/seat_2.jpg',
+            width: 28,
+          ),
+        ),
+        Text(seatNumber,style: TextStyle(color: Colors.grey),)
+      ],
+    ): GestureDetector(
       onTap: (){
        setState(() {
-         selected=!selected;
+         selected =!selected;
+         print('tap!');
        });
       },
-      child: Stack(
+      child: Stack(fit: StackFit.loose,
         alignment: Alignment.center,
         children: [
-          Container(
-                              margin: const EdgeInsets.all(16),
+                    Container(
+                              margin: const EdgeInsets.all(6),
                               child: Image.asset(
                                 selected ?
                                 'assets/seat_3.jpg':
@@ -390,7 +402,7 @@ class _SeatPageState extends State<SeatPage> {
                                 width: 28,
                               ),
                             ),
-          Text("a1",style: TextStyle(color: Colors.grey),)
+          Text('$seatNumber',style: TextStyle(color: Colors.grey),)
         ],
       ),
     );
