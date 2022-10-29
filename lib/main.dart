@@ -1,6 +1,8 @@
 import 'package:bus_ticket_booking_app/Pages/launcher_page.dart';
 import 'package:bus_ticket_booking_app/Pages/login_page.dart';
+import 'package:bus_ticket_booking_app/Pages/seat.dart';
 import 'package:bus_ticket_booking_app/Provider/user_provider.dart';
+import 'package:bus_ticket_booking_app/Pages/bus_list.dart';
 import 'package:bus_ticket_booking_app/onBoarding/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,8 +37,9 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.green,
       ),
-      home: showHome? const LoginPage(): OnBoarding() ,
+      // home: showHome? const LoginPage(): OnBoarding() ,
       // initialRoute: OnBoarding.routeName,
+      home: SeatPage(),
       routes: {
         LoginPage.routeName:(context)=>const LoginPage(),
         LauncherPage.routeName:(context)=>const LauncherPage(),
