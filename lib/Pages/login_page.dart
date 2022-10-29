@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     top: 25,
                     child: Text('''Welcome
      To
-GoTravels ''',
+DakTicket ''',
                       style: TextStyle(
                         wordSpacing: 5,
                         fontSize: 28,
@@ -72,7 +72,7 @@ GoTravels ''',
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  // Email form starts here
+                                                                   // Email form starts here
               child: TextFormField(
                 focusNode: FocusNode(),
                 onTap: (){
@@ -119,7 +119,7 @@ GoTravels ''',
               ),
             ),
             SizedBox(height: 20,),
-                                  // Password Form filled stats here
+                                                              // Password Form filled stats here
             Padding(
               padding:  const EdgeInsets.symmetric(horizontal: 15.0),
               child: TextFormField(
@@ -275,7 +275,33 @@ GoTravels ''',
   _setErrorMsg(String msg) {
     setState(() {
       errMsg = msg;
+      showErrorSnackBar(context,errMsg);
     });
+  }
+
+  void showErrorSnackBar(BuildContext context,String errMsg) {
+    final snackBar = SnackBar(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(Icons.error_outline, size: 32),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              errMsg,
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.red.withOpacity(.50),
+      duration: Duration(seconds: 3),
+      behavior: SnackBarBehavior.fixed,
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 }
 
